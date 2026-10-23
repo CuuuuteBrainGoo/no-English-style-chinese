@@ -1,0 +1,35 @@
+# Agent working notes, raw evaluations, reminder scripts and screenshots stay local.
+# Only the skill's UI metadata is public in this directory.
+/agents/*
+!/agents/openai.yaml
+
+# Older or accidentally relocated working logs must also remain local.
+WORKLOG.md
+WORKLOG-*.md
+work-log*.md
+worklog*.md
+*.log
+/local/
+
+# Secrets and machine-specific settings.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/
+
+# Temporary files and local runtimes.
+*.tmp
+*.bak
+*~
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+node_modules/
