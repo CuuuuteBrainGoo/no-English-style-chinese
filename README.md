@@ -2,7 +2,7 @@
 
 让 AI 用更好的中文表达：**删掉空话，也把值得说的话说充分。**
 
-A skill for natural, precise Chinese responses. It guides choices in context, without phrase bans or a fixed voice.
+A skill for idiomatic, precise Chinese responses, reducing awkward carryovers from English meaning, syntax, and conversational conventions without phrase bans or a fixed voice.
 
 这个项目面向每天用中文与 AI 交流的人。默认语气是自然、克制的日常书面语，既能把复杂事情讲清楚，也能容纳适当的情感、节奏和个人表达。
 
@@ -11,6 +11,8 @@ A skill for natural, precise Chinese responses. It guides choices in context, wi
 有些回复每句话都通顺，合起来却让人费劲：动作藏在抽象名词后面，术语一个接一个，先预告怎样解释，再重复已经说过的结论。另一种常见问题是改得过短，只剩“还不能确定”“测试通过不代表没问题”，把用户真正需要的解释也删掉了。
 
 本项目把注意力放在表达的作用上：这句话在回答什么，读者还需要知道什么，哪些意思不能省，怎样说才贴切。
+
+具体目标是减少中文里的英语词义、搭配、句法、语序和语用痕迹。尤其在中文直接对话中，应从事情本身和中文交流习惯出发组织回答，让读者直接理解意思，不感到自己在读英文句子的译文。语法成立、字面说得通，还不足以说明一句话适合眼前的场景；需要同时看它带出的联想、轻重与分寸。这里描述的是输出目标，不据此断言模型实际先用哪种语言思考，也不排斥已经自然融入中文的表达。
 
 下面是虚构的交流情境，示范判断方法，不是固定替换模板。
 
