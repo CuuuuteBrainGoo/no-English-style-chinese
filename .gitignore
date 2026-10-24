@@ -12,6 +12,7 @@ worklog*.md
 /local/
 
 # Secrets and machine-specific settings.
+/.workbuddy/
 .env
 .env.*
 !.env.example
