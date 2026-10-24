@@ -50,6 +50,18 @@ $no-english-style-chinese
 
 仓库名按项目约定保留 `no-English-style-chinese`；技能内部标识使用小写 `no-english-style-chinese`，供工具识别和调用。安装工具要求目录与技能标识相同时，安装目录使用小写即可。文件已下载、技能已发现、某次回答已应用，是三件不同的事；以当前工具实际显示和回复表现核对。
 
+**只在一个 Codex 项目里使用：** 将发布包解压到你要使用它的项目的 `.agents/skills` 目录下，得到以下位置。没有这个目录时再创建；它用于让 Codex 查找当前项目的技能。
+
+```text
+你的项目/
+  .agents/skills/no-english-style-chinese/
+    SKILL.md
+    references/
+    agents/openai.yaml
+```
+
+保留包内相对目录，随后在这个项目的 Codex 会话里查找技能并显式调用；若没有显示，先检查路径，再按当前工具的说明重新加载。发布包在 `codex-cli 0.164.0-alpha.11.1` 的隔离项目中已通过技能发现检查：名称、启用状态和界面元数据均被正确读取。这个结果不等于所有宿主都兼容，也不保证每次问答自动触发。
+
 独立技能目录适用于支持这一形式的 ChatGPT 桌面端、Codex CLI 或 IDE 扩展。Codex 可以通过内置的 `$skill-installer` 从其他仓库安装技能；在支持独立技能的 ChatGPT 桌面界面中，按 `@` 选择已识别的技能。网页和手机端的插件分发是另一种形式，本仓库尚未制作插件包。发现位置、界面和调用方式会随产品变化，安装时参照 [OpenAI 官方技能说明](https://learn.chatgpt.com/docs/build-skills)。本仓库提供技能文件，没有自动修改你的全局配置，也没有提交到插件市场。
 
 ## 设计选择
