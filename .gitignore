@@ -3,6 +3,10 @@
 /agents/*
 !/agents/openai.yaml
 
+# Local maintenance instructions and evaluation development material
+/AGENTS.md
+/evals/
+
 # Older or accidentally relocated working logs must also remain local.
 WORKLOG.md
 WORKLOG-*.md
