@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>no-english-style-chinese · 自测盲评</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --text: #17202a;
+      --muted: #5f6b7a;
+      --line: #d9e0e7;
+      --accent: #1f6feb;
+      --accent-soft: #e7f0ff;
+      --ok: #1a7f37;
+      --warn: #9a6700;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    h1 { font-size: 26px; margin: 0 0 8px; }
+    h2 { font-size: 20px; margin: 0 0 12px; }
+    h3 { font-size: 16px; margin: 0 0 8px; }
+    p { margin: 0 0 12px; }
+    .subtitle { color: var(--muted); margin-bottom: 20px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .mode {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      background: #fbfcfe;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 999px;
+      padding: 2px 9px;
+      margin-bottom: 8px;
+    }
+    .prompt-box {
+      background: #f3f5f8;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: 15px;
+    }
+    .reply {
+      min-height: 170px;
+      width: 100%;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      background: #fbfcfe;
+    }
+    .reply[readonly] {
+      background: #f3f5f8;
+      min-height: 220px;
+    }
+    button {
+      font: inherit;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: #fff;
+      color: var(--accent);
+    }
+    button:hover { filter: brightness(0.97); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; }
+    select {
+      font: inherit;
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 7px 8px;
+      background: #fff;
+    }
+    .hidden { display: none; }
+    .muted { color: var(--muted); font-size: 14px; }
+    .note {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 10px 12px;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+    }
+    .warn { border-left-color: var(--warn); background: #fff8e6; }
+    .judge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .score-row {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    .result-table th, .result-table td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 14px;
+    }
+    .result-table th { background: #f3f5f8; }
+    .reveal {
+      margin-top: 12px;
+      font-weight: 700;
+      color: var(--ok);
+    }
+    @media (max-width: 760px) {
+      .grid, .judge-grid { grid-template-columns: 1fr; }
+      .score-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>自己动手做一次小盲测</h1>
+    <p class="subtitle">用同一个题目，比较“普通模式”和“技能模式”的回答。这个工具只在你的浏览器里运行，不会上传你粘贴的内容。</p>
+
+    <div class="note warn">
+      这个技能主要用来<strong>直接回答问题</strong>，不是把一段文字改成另一种腔调的改写器。体验时请让两份回答分别完成同一个任务。
+    </div>
+
+    <section class="card">
+      <h2>第 1 步：选一个题目</h2>
+      <p class="muted">题目覆盖概念解释、数据说明、方案建议、项目沟通、正式通知、客服、日常沟通、情绪回应、叙事、产品文案、招募文案和英译中。</p>
+      <div class="actions" style="margin-bottom:12px">
+        <label for="taskSelect" style="margin:0;min-width:90px">题目</label>
+        <select id="taskSelect" style="max-width:520px"></select>
+        <button class="secondary" id="randomTask" type="button">随机换题</button>
+        <button class="secondary" id="copyPrompt" type="button">复制题目</button>
+      </div>
+      <div class="prompt-box" id="promptText"></div>
+    </section>
+
+    <section class="card">
+      <h2>第 2 步：分别问两个 agent</h2>
+      <p>请使用<strong>同一个模型</strong>和<strong>同一个题目</strong>，开两个新对话分别问，不要让同一个 agent 在同一段对话里扮演两种角色。</p>
+      <div class="grid">
+        <div class="mode">
+          <span class="tag">普通模式</span>
+          <h3>不加载本技能</h3>
+          <p class="muted">直接把题目发给一个没有加载技能的 agent。</p>
+        </div>
+        <div class="mode">
+          <span class="tag">技能模式</span>
+          <h3>加载本技能</h3>
+          <p class="muted">在支持技能调用的工具里，可以用下面格式：</p>
+          <div class="prompt-box" style="font-size:14px">$no-english-style-chinese
+&lt;粘贴这里的题目&gt;</div>
+          <p class="muted" style="margin-top:8px">如果你的工具不支持 <code>$</code>，就按它的技能调用方式加载后再提问。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>第 3 步：粘贴两份回答</h2>
+      <div class="grid">
+        <div>
+          <label for="normalReply">普通模式回答</label>
+          <textarea id="normalReply" class="reply" placeholder="粘贴不加载技能时的回答"></textarea>
+        </div>
+        <div>
+          <label for="skillReply">技能模式回答</label>
+          <textarea id="skillReply" class="reply" placeholder="粘贴加载技能后的回答"></textarea>
+        </div>
+      </div>
+      <div class="actions" style="margin-top:12px">
+        <button id="startJudge" type="button">开始盲评</button>
+        <span class="muted">开始后，页面会把两份回答随机变成 A / B，并暂时隐藏来源。</span>
+      </div>
+    </section>
+
+    <section class="card hidden" id="judgeCard">
+      <h2>第 4 步：盲评 A / B</h2>
+      <p class="muted">评分：1 = 很差，2 = 较差，3 = 一般，4 = 较好，5 = 很好。</p>
+      <div class="judge-grid">
+        <div class="mode">
+          <h3>回答 A</h3>
+          <pre id="replyA" class="reply" readonly></pre>
+          <div id="scoresA"></div>
+        </div>
+        <div class="mode">
+          <h3>回答 B</h3>
+          <pre id="replyB" class="reply" readonly></pre>
+          <div id="scoresB"></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;max-width:420px">
+        <label for="winner">你更愿意读哪一份？</label>
+        <select id="winner">
+          <option value="tie">差不多</option>
+          <option value="a">A 更好</option>
+          <option value="b">B 更好</option>
+        </select>
+      </div>
+      <div class="actions" style="margin-top:14px">
+        <button id="reveal" type="button">评分完成，揭示来源</button>
+        <button class="secondary" id="backToInput" type="button">返回修改回答</button>
+      </div>
+    </section>
+
+    <section class="card hidden" id="resultCard">
+      <h2>结果</h2>
+      <div id="resultSummary"></div>
+      <div id="resultTable"></div>
+      <div class="reveal" id="revealText"></div>
+      <p class="muted" style="margin-top:14px">这是个人体验，不是严格盲测，也不能用来证明技能在所有模型和任务上都有效。可以多换几个题目试试。</p>
+      <div class="actions">
+        <button class="secondary" id="resetRound" type="button">再测一次</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tasks = [
+      { group: "概念解释", title: "同步和备份", prompt: "向第一次用手机云备份的家人解释“同步”和“备份”的区别，并提醒删除照片前要注意什么。" },
+      { group: "数据说明", title: "一周数据", prompt: "向项目经理说明：本周新增用户 320，环比上升 12%；老用户活跃下降 4%；新功能带来的注册约占 35%。" },
+      { group: "方案建议", title: "搜索还是筛选", prompt: "团队在争论先做搜索还是先做筛选。请说明两种选择各自适合什么情况，并给出建议。" },
+      { group: "项目沟通", title: "功能延期", prompt: "告诉客户功能需要延期一周。说明哪些部分已经验证、哪些部分还没有确认，不要把未验证的事说成已完成。" },
+      { group: "正式通知", title: "提交材料", prompt: "写一条正式通知：申请人应于周五17:00前提交材料，逾期申请不予受理。" },
+      { group: "安全说明", title: "熟人借钱视频", prompt: "告诉家人，如果收到“熟人借钱”的视频电话，应该如何核实风险。" },
+      { group: "客服沟通", title: "文件还能恢复吗", prompt: "用户问：“我已经把文件删了，还能恢复吗？”请回复用户，不要给出没有依据的保证。" },
+      { group: "日常沟通", title: "晚点到", prompt: "告诉朋友你会晚 30 分钟到，原因是地铁临时限流。" },
+      { group: "情绪回应", title: "考试没通过", prompt: "朋友说准备三个月的考试没有通过。请回应这件事，不夸大安慰，也不替对方下结论。" },
+      { group: "叙事", title: "等电话", prompt: "写一段大约80字的场景：一个人在等一个一直没有来的电话。" },
+      { group: "产品文案", title: "离线记账本", prompt: "为“可离线使用的记账本”写两句介绍，面向不方便经常联网的人。" },
+      { group: "招募文案", title: "社区志愿者", prompt: "招募社区志愿者，每两周整理一次书角，时间灵活。" },
+      { group: "英译中·日常", title: "诊所", prompt: "把下面这句翻译成中文：\nI'm stuck at the clinic with Mum." },
+      { group: "英译中·新闻", title: "计划复审", prompt: "把下面这句翻译成中文：\nThe committee said the plan will be reviewed next month." },
+      { group: "英译中·技术", title: "重试机制", prompt: "把下面这句翻译成中文：\nThe service retries failed requests up to three times." },
+      { group: "英译中·文学", title: "灯与夜", prompt: "把下面这句翻译成中文：\nThe night was long, and the lamp kept its small circle of light." }
+    ];
+
+    const dimensions = ["任务完成", "事实与条件", "中文表达", "AI 味控制", "文体合适", "总体感受"];
+    const taskSelect = document.getElementById("taskSelect");
+    const promptText = document.getElementById("promptText");
+    const normalReply = document.getElementById("normalReply");
+    const skillReply = document.getElementById("skillReply");
+    const judgeCard = document.getElementById("judgeCard");
+    const resultCard = document.getElementById("resultCard");
+    const scoresA = document.getElementById("scoresA");
+    const scoresB = document.getElementById("scoresB");
+    let currentTask = 0;
+    let mapping = { A: "", B: "" };
+
+    function fillTaskSelect() {
+      tasks.forEach((task, index) => {
+        const option = document.createElement("option");
+        option.value = String(index);
+        option.textContent = task.group + " · " + task.title;
+        taskSelect.appendChild(option);
+      });
+    }
+
+    function showTask(index) {
+      currentTask = (index + tasks.length) % tasks.length;
+      taskSelect.value = String(currentTask);
+      promptText.textContent = tasks[currentTask].prompt;
+    }
+
+    function randomTask() {
+      let next = currentTask;
+      if (tasks.length > 1) {
+        while (next === currentTask) {
+          next = Math.floor(Math.random() * tasks.length);
+        }
+      }
+      showTask(next);
+    }
+
+    async function copyPrompt() {
+      try {
+        await navigator.clipboard.writeText(promptText.textContent);
+        document.getElementById("copyPrompt").textContent = "已复制";
+        setTimeout(() => {
+          document.getElementById("copyPrompt").textContent = "复制题目";
+        }, 1200);
+      } catch (_) {
+        window.getSelection().selectAllChildren(promptText);
+      }
+    }
+
+    function makeScoreBlock(container, label) {
+      container.innerHTML = "";
+      dimensions.forEach((name) => {
+        const row = document.createElement("div");
+        row.className = "score-row";
+        const lab = document.createElement("label");
+        lab.textContent = name;
+        lab.setAttribute("for", label + "-" + name);
+        const select = document.createElement("select");
+        select.id = label + "-" + name;
+        for (let value = 1; value <= 5; value++) {
+          const option = document.createElement("option");
+          option.value = String(value);
+          option.textContent = String(value);
+          if (value === 3) option.selected = true;
+          select.appendChild(option);
+        }
+        row.appendChild(lab);
+        row.appendChild(select);
+        container.appendChild(row);
+      });
+    }
+
+    function readScores(container) {
+      return dimensions.map((name) => Number(container.querySelector("select[id$='-" + name + "']").value));
+    }
+
+    function scoreTable(scoresAArray, scoresBArray) {
+      let html = '<table class="result-table"><thead><tr><th>评分维度</th><th>回答 A</th><th>回答 B</th></tr></thead><tbody>';
+      dimensions.forEach((name, index) => {
+        html += "<tr><td>" + name + "</td><td>" + scoresAArray[index] + "</td><td>" + scoresBArray[index] + "</td></tr>";
+      });
+      const sum = (values) => values.reduce((a, b) => a + b, 0);
+      html += "</tbody><tfoot><tr><th>合计</th><th>" + sum(scoresAArray) + " / " + (dimensions.length * 5) + "</th><th>" + sum(scoresBArray) + " / " + (dimensions.length * 5) + "</th></tr></tfoot></table>";
+      return html;
+    }
+
+    function startJudge() {
+      if (!normalReply.value.trim() || !skillReply.value.trim()) {
+        alert("请先粘贴两份回答。");
+        return;
+      }
+      mapping.A = Math.random() < 0.5 ? "normal" : "skill";
+      mapping.B = mapping.A === "normal" ? "skill" : "normal";
+      document.getElementById("replyA").textContent = mapping.A === "normal" ? normalReply.value : skillReply.value;
+      document.getElementById("replyB").textContent = mapping.B === "normal" ? normalReply.value : skillReply.value;
+      makeScoreBlock(scoresA, "a");
+      makeScoreBlock(scoresB, "b");
+      resultCard.classList.add("hidden");
+      judgeCard.classList.remove("hidden");
+      judgeCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function revealResult() {
+      const scoresAArray = readScores(scoresA);
+      const scoresBArray = readScores(scoresB);
+      const winner = document.getElementById("winner").value;
+      const winnerText = winner === "a" ? "回答 A" : winner === "b" ? "回答 B" : "差不多";
+      document.getElementById("resultSummary").textContent = "你的选择：" + winnerText;
+      document.getElementById("resultTable").innerHTML = scoreTable(scoresAArray, scoresBArray);
+      const source = (kind) => kind === "normal" ? "普通模式" : "技能模式";
+      document.getElementById("revealText").textContent = "揭示：回答 A 是 " + source(mapping.A) + "；回答 B 是 " + source(mapping.B) + "。";
+      resultCard.classList.remove("hidden");
+      resultCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function resetRound() {
+      normalReply.value = "";
+      skillReply.value = "";
+      document.getElementById("winner").value = "tie";
+      resultCard.classList.add("hidden");
+      judgeCard.classList.add("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    taskSelect.addEventListener("change", () => showTask(Number(taskSelect.value)));
+    document.getElementById("randomTask").addEventListener("click", randomTask);
+    document.getElementById("copyPrompt").addEventListener("click", copyPrompt);
+    document.getElementById("startJudge").addEventListener("click", startJudge);
+    document.getElementById("reveal").addEventListener("click", revealResult);
+    document.getElementById("backToInput").addEventListener("click", () => {
+      judgeCard.classList.add("hidden");
+      resultCard.classList.add("hidden");
+      normalReply.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+    document.getElementById("resetRound").addEventListener("click", resetRound);
+
+    fillTaskSelect();
+    showTask(Math.floor(Math.random() * tasks.length));
+  </script>
+</body>
+</html>
