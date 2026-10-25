@@ -141,38 +141,27 @@
 
 这只是一次小样本体验，不能替代更大规模的匿名评阅。工具不能读取项目文件时，可以先把 `SKILL.md` 和 `references/context-examples.md` 提供给它；不支持子 agent 时，也不要让同一个对话假装完成了相互隔离的生成和评审。
 
-### 作为技能安装
+### 让 agent 安装
 
-**推荐下载正式版 ZIP：** [no-English-style-chinese-v0.1.0.zip](https://github.com/CuuuuteBrainGoo/no-English-style-chinese/releases/download/v0.1.0/no-English-style-chinese-v0.1.0.zip)。
-
-1. 下载并解压，得到 `no-english-style-chinese` 文件夹。
-2. 按所用工具的技能安装说明，将**整个文件夹**放到它识别的技能目录；不要只复制 `SKILL.md`，否则按需读取的语境案例会丢失。
-3. 让工具重新加载技能，或按工具要求重开对话。安装后可以用 `$no-english-style-chinese` 显式调用；不支持 `$` 的工具，按它自己的调用方式使用。
-
-也可以下载 GitHub 自动生成的 [源代码 ZIP](https://github.com/CuuuuteBrainGoo/no-English-style-chinese/archive/refs/tags/v0.1.0.zip)。两种方式内容一致；正式版附件已经把技能文件夹放在压缩包顶层，解压后少整理一层目录。
-
-解压后的结构应为：
+如果你的 agent 能访问 GitHub、执行命令并管理技能目录，直接把下面这段发给它：
 
 ```text
-no-english-style-chinese/
-  SKILL.md
-  references/
-    context-examples.md
-    research.md
-  agents/
-    openai.yaml
+请把 https://github.com/CuuuuteBrainGoo/no-English-style-chinese 安装为当前工具可用的技能。
+保留 SKILL.md、references 和 agents/openai.yaml 的相对位置，不要只复制 SKILL.md。
+安装后告诉我实际使用的技能目录，并检查 no-english-style-chinese 是否已被识别。
 ```
 
-技能内部名称是全小写的 `no-english-style-chinese`；仓库名称保留 `no-English-style-chinese`。
+不需要先下载 ZIP，也不需要为了这个项目安装 npm。ZIP 只是离线分发附件，不是推荐安装流程；npm 也不能代替工具识别和加载技能。
 
-在已经识别该技能、支持 `$` 调用的工具中，可以显式使用：
+### 命令行安装
 
-```text
-$no-english-style-chinese
-请解释这两种方案各自适合什么情况，以及你建议我选哪一种。
+如果你知道工具的技能目录，也可以直接克隆。以 WorkBuddy 的用户级技能目录为例：
+
+```bash
+git clone https://github.com/CuuuuteBrainGoo/no-English-style-chinese.git "$HOME/.workbuddy/skills/no-english-style-chinese"
 ```
 
-安装路径、重新加载和调用方式以当前工具的说明为准。下载文件、工具识别技能、某次回答实际应用技能，是三个不同环节，需要分别核对。
+其他工具把目标目录换成它自己的技能目录即可。安装后让工具重新加载技能，再用 `$no-english-style-chinese` 调用；不支持 `$` 的工具，按它自己的调用方式使用。
 
 ## 文件说明
 
